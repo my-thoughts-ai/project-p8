@@ -70,7 +70,7 @@ channels:
   console:  { enabled: true }
   email:    { enabled: true, subject_prefix: "[Manaslu]" }
   telegram: { enabled: true }
-  sms:      { enabled: true, max_segments: 2, active_until: "2026-09-10" }
+  sms:      { enabled: flase, max_segments: 2, active_until: "2026-09-10" }
 
 storage:
   db_path: "data/manaslu.sqlite"
