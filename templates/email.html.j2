@@ -1,0 +1,102 @@
+<!doctype html>
+<html><body style="margin:0;padding:0;background:#f4f5f7;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#1c1e21;">
+<div style="max-width:760px;margin:0 auto;padding:20px;">
+
+  <div style="background:{{ header_color }};color:#fff;padding:18px 20px;border-radius:8px 8px 0 0;">
+    <div style="font-size:20px;font-weight:600;">{{ title }}</div>
+    <div style="font-size:13px;opacity:.9;margin-top:4px;">
+      {{ location_name }} &middot; {{ latitude }}, {{ longitude }} &middot; model {{ model }}<br>
+      Issued {{ issued_utc }} UTC ({{ issued_local }} Nepal)
+    </div>
+  </div>
+
+  <div style="background:#fff;padding:20px;border:1px solid #e1e3e6;border-top:0;border-radius:0 0 8px 8px;">
+
+  {% if warnings %}
+    <div style="background:#fdecea;border-left:4px solid #c0392b;padding:12px 14px;margin-bottom:18px;border-radius:4px;">
+      <div style="font-weight:600;color:#a5281b;margin-bottom:6px;">Active warnings</div>
+      <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.6;">
+        {% for w in warnings %}<li>{{ w }}</li>{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+    <div style="font-size:15px;margin-bottom:14px;">
+      <strong>Headline:</strong> {{ headline }}
+    </div>
+
+    <div style="font-weight:600;font-size:15px;margin:20px 0 8px;">Summit windows (next {{ lookahead_days }} days)</div>
+    {% if windows %}
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <tr style="background:#eef1f4;text-align:left;">
+          <th style="padding:8px;border:1px solid #e1e3e6;">Start (UTC)</th>
+          <th style="padding:8px;border:1px solid #e1e3e6;">End (UTC)</th>
+          <th style="padding:8px;border:1px solid #e1e3e6;">Hours</th>
+          <th style="padding:8px;border:1px solid #e1e3e6;">Max wind</th>
+          <th style="padding:8px;border:1px solid #e1e3e6;">Min wind chill</th>
+        </tr>
+        {% for w in windows %}
+        <tr>
+          <td style="padding:8px;border:1px solid #e1e3e6;">{{ w.start }}</td>
+          <td style="padding:8px;border:1px solid #e1e3e6;">{{ w.end }}</td>
+          <td style="padding:8px;border:1px solid #e1e3e6;"><strong>{{ w.hours }}</strong></td>
+          <td style="padding:8px;border:1px solid #e1e3e6;">{{ w.max_wind }} km/h</td>
+          <td style="padding:8px;border:1px solid #e1e3e6;">{{ w.min_chill }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <div style="font-size:14px;color:#6b7076;">
+        No run of {{ min_window_hours }}+ consecutive climbable hours in the forecast horizon.
+      </div>
+    {% endif %}
+
+    {% for block in blocks %}
+      <div style="font-weight:600;font-size:15px;margin:22px 0 8px;">
+        {{ block.heading }} <span style="font-weight:400;color:#6b7076;font-size:13px;">({{ block.local }} Nepal)</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <tr style="background:#eef1f4;text-align:left;">
+          <th style="padding:7px;border:1px solid #e1e3e6;">Altitude</th>
+          <th style="padding:7px;border:1px solid #e1e3e6;">Temp</th>
+          <th style="padding:7px;border:1px solid #e1e3e6;">Wind</th>
+          <th style="padding:7px;border:1px solid #e1e3e6;">Dir</th>
+          <th style="padding:7px;border:1px solid #e1e3e6;">Wind chill</th>
+          <th style="padding:7px;border:1px solid #e1e3e6;">RH</th>
+          <th style="padding:7px;border:1px solid #e1e3e6;">Status</th>
+        </tr>
+        {% for r in block.rows %}
+        <tr style="background:{{ r.bg }};">
+          <td style="padding:7px;border:1px solid #e1e3e6;"><strong>{{ r.altitude }} m</strong><br><span style="color:#6b7076;">{{ r.label }}</span></td>
+          <td style="padding:7px;border:1px solid #e1e3e6;">{{ r.temp }}</td>
+          <td style="padding:7px;border:1px solid #e1e3e6;">{{ r.wind }}</td>
+          <td style="padding:7px;border:1px solid #e1e3e6;">{{ r.direction }}</td>
+          <td style="padding:7px;border:1px solid #e1e3e6;">{{ r.chill }}</td>
+          <td style="padding:7px;border:1px solid #e1e3e6;">{{ r.humidity }}</td>
+          <td style="padding:7px;border:1px solid #e1e3e6;">
+            <span style="display:inline-block;padding:2px 8px;border-radius:10px;background:{{ r.badge }};color:#fff;font-size:11px;font-weight:600;">{{ r.status }}</span>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      <div style="font-size:12px;color:#6b7076;margin-top:6px;">
+        Surface: precip {{ block.precip }} mm/h &middot; snow {{ block.snow }} mm/h &middot;
+        gusts {{ block.gusts }} km/h &middot; freezing level {{ block.freezing }} m &middot;
+        MSLP {{ block.mslp }} hPa ({{ block.mslp_trend }}/6h) &middot; CAPE {{ block.cape }} J/kg
+      </div>
+    {% endfor %}
+
+    {% if cross_check %}
+      <div style="font-size:13px;color:#4a4f55;margin-top:20px;padding:10px 12px;background:#f7f8f9;border-radius:4px;">
+        <strong>Model cross-check ({{ cross_check.model }}):</strong> {{ cross_check.summary }}
+      </div>
+    {% endif %}
+
+    <div style="margin-top:24px;padding-top:14px;border-top:1px solid #e1e3e6;font-size:12px;color:#6b7076;line-height:1.6;">
+      <strong>{{ disclaimer }}</strong><br>
+      Altitudes interpolated from {{ levels }} hPa pressure levels using forecast geopotential
+      height. Times UTC unless marked. Source: Open-Meteo ({{ model }}).
+    </div>
+  </div>
+</div>
+</body></html>
