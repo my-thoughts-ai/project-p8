@@ -1,0 +1,28 @@
+name: Keepalive
+
+# GitHub disables scheduled workflows on a repository with 60 days of no commit
+# activity. An 85-day season would go silent around day 60 with no warning, so this
+# job pushes a dated heartbeat every 10 days purely to reset that counter.
+# Do not delete it while the season is running.
+on:
+  schedule:
+    - cron: "0 4 */10 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Touch heartbeat
+        run: |
+          date -u +"%Y-%m-%dT%H:%M:%SZ scheduler heartbeat" > .keepalive
+          git config user.name "manaslu-bot"
+          git config user.email "manaslu-bot@users.noreply.github.com"
+          git add .keepalive
+          git diff --staged --quiet || git commit -m "chore: scheduler keepalive [skip ci]"
+          git push

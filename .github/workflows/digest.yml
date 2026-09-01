@@ -1,0 +1,73 @@
+name: Manaslu digest
+
+# Twice daily. Cron is UTC. Keep these in sync with config.yaml digest.times_utc.
+on:
+  schedule:
+    - cron: "0 1 * * *"    # 01:00 UTC = 06:45 Nepal
+    - cron: "0 13 * * *"   # 13:00 UTC = 18:45 Nepal
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Render only, send nothing"
+        type: boolean
+        default: false
+
+concurrency:
+  group: manaslu-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # The alert-state database must survive between runs or danger mode would
+      # re-send the same warning forever. A unique key per run with a shared
+      # restore prefix gives a rolling read-write cache.
+      - name: Restore state database
+        uses: actions/cache/restore@v4
+        with:
+          path: data
+          key: manaslu-db-${{ github.run_id }}
+          restore-keys: manaslu-db-
+
+      - name: Run digest
+        env:
+          MANASLU_EMAIL_TO: ${{ secrets.MANASLU_EMAIL_TO }}
+          MANASLU_SMS_TO: ${{ secrets.MANASLU_SMS_TO }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_FROM_NUMBER: ${{ secrets.TWILIO_FROM_NUMBER }}
+        run: |
+          python -m src.main --mode digest ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Save state database
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data
+          key: manaslu-db-${{ github.run_id }}
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: digest-logs-${{ github.run_id }}
+          path: |
+            data/*.log
+            data/*.sqlite
+          retention-days: 14
+          if-no-files-found: ignore
