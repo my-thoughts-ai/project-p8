@@ -1,0 +1,4 @@
+{
+  "tests/test_metrics.py::test_wind_chill_matches_nws_table[-10-30--18]": true,
+  "tests/test_pipeline.py::test_recipients_are_configured": true
+}
