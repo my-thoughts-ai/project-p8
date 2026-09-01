@@ -1,0 +1,95 @@
+2026-09-01 14:24:04,919Z INFO    manaslu: Starting mode=test dry_run=False
+2026-09-01 14:24:04,919Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 14:24:05,171Z INFO    manaslu.metrics: Found 1 summit window(s) of >= 6 h
+2026-09-01 14:24:05,208Z INFO    manaslu.format: SMS built: 170 chars, 2 segment(s)
+2026-09-01 14:24:13,717Z INFO    manaslu: Starting mode=digest dry_run=False
+2026-09-01 14:24:13,717Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 14:24:13,882Z INFO    manaslu.metrics: Found 1 summit window(s) of >= 6 h
+2026-09-01 14:24:13,927Z INFO    manaslu.format: SMS built: 170 chars, 2 segment(s)
+2026-09-01 14:24:13,928Z INFO    manaslu: SMS is 2 segment(s)
+2026-09-01 14:24:13,928Z INFO    manaslu: Dispatch: sent: console (printed to console) | skipped: email (disabled in config.yaml), telegram (disabled in config.yaml), sms (disabled in config.yaml)
+2026-09-01 14:24:14,626Z INFO    manaslu.store: Stored 360 forecast rows (model=gfs_seamless)
+2026-09-01 14:24:15,396Z INFO    manaslu: Starting mode=danger dry_run=False
+2026-09-01 14:24:15,396Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 14:24:15,566Z INFO    manaslu: Found 50 red event row(s) in the next 24 h
+2026-09-01 14:24:15,567Z INFO    manaslu: Decision: send=True kind=new (new red condition)
+2026-09-01 14:24:15,772Z INFO    manaslu.store: Stored 360 forecast rows (model=gfs_seamless)
+2026-09-01 14:24:15,778Z INFO    manaslu.metrics: Found 1 summit window(s) of >= 6 h
+2026-09-01 14:24:15,806Z INFO    manaslu.format: SMS built: 176 chars, 2 segment(s)
+2026-09-01 14:24:15,806Z INFO    manaslu: Dispatch: sent: console (printed to console) | skipped: email (disabled in config.yaml), telegram (disabled in config.yaml), sms (disabled in config.yaml)
+2026-09-01 14:24:16,726Z INFO    manaslu: Starting mode=danger dry_run=False
+2026-09-01 14:24:16,726Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 14:24:16,906Z INFO    manaslu: Found 50 red event row(s) in the next 24 h
+2026-09-01 14:24:16,907Z INFO    manaslu: Decision: send=False kind=none (identical warning already sent, within reminder interval)
+2026-09-01 14:24:17,052Z INFO    manaslu.store: Stored 360 forecast rows (model=gfs_seamless)
+2026-09-01 14:24:17,807Z INFO    manaslu: Starting mode=status dry_run=False
+2026-09-01 14:28:30,962Z INFO    manaslu: Starting mode=danger dry_run=False
+2026-09-01 14:28:30,963Z INFO    manaslu.fetch: Fetching ['gfs_seamless'] forecast (attempt 1/3)
+2026-09-01 14:28:31,290Z INFO    httpx: HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=28.55&longitude=84.56&hourly=wind_speed_600hPa%2Cwind_direction_600hPa%2Ctemperature_600hPa%2Crelative_humidity_600hPa%2Cgeopotential_height_600hPa%2Cwind_speed_550hPa%2Cwind_direction_550hPa%2Ctemperature_550hPa%2Crelative_humidity_550hPa%2Cgeopotential_height_550hPa%2Cwind_speed_500hPa%2Cwind_direction_500hPa%2Ctemperature_500hPa%2Crelative_humidity_500hPa%2Cgeopotential_height_500hPa%2Cwind_speed_450hPa%2Cwind_direction_450hPa%2Ctemperature_450hPa%2Crelative_humidity_450hPa%2Cgeopotential_height_450hPa%2Cwind_speed_400hPa%2Cwind_direction_400hPa%2Ctemperature_400hPa%2Crelative_humidity_400hPa%2Cgeopotential_height_400hPa%2Cwind_speed_350hPa%2Cwind_direction_350hPa%2Ctemperature_350hPa%2Crelative_humidity_350hPa%2Cgeopotential_height_350hPa%2Cwind_speed_300hPa%2Cwind_direction_300hPa%2Ctemperature_300hPa%2Crelative_humidity_300hPa%2Cgeopotential_height_300hPa%2Cprecipitation%2Csnowfall%2Cfreezing_level_height%2Cwind_gusts_10m%2Ccloud_cover%2Ccape%2Cpressure_msl%2Cweather_code&models=gfs_seamless&timezone=UTC&forecast_days=7&wind_speed_unit=kmh "HTTP/1.1 200 OK"
+2026-09-01 14:28:31,298Z INFO    manaslu.fetch: Got 168 hourly steps for 28.5259,84.6094 (grid elevation 8011 m)
+2026-09-01 14:28:31,668Z INFO    manaslu: Found 50 red event row(s) in the next 24 h
+2026-09-01 14:28:31,670Z INFO    manaslu: Decision: send=False kind=none (identical warning already sent, within reminder interval)
+2026-09-01 14:28:31,922Z INFO    manaslu.store: Stored 840 forecast rows (model=gfs_seamless)
+2026-09-01 14:29:19,652Z INFO    manaslu: Starting mode=digest dry_run=False
+2026-09-01 14:29:19,710Z INFO    manaslu.fetch: Fetching ['gfs_seamless'] forecast (attempt 1/3)
+2026-09-01 14:29:20,050Z INFO    httpx: HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=28.55&longitude=84.56&hourly=wind_speed_600hPa%2Cwind_direction_600hPa%2Ctemperature_600hPa%2Crelative_humidity_600hPa%2Cgeopotential_height_600hPa%2Cwind_speed_550hPa%2Cwind_direction_550hPa%2Ctemperature_550hPa%2Crelative_humidity_550hPa%2Cgeopotential_height_550hPa%2Cwind_speed_500hPa%2Cwind_direction_500hPa%2Ctemperature_500hPa%2Crelative_humidity_500hPa%2Cgeopotential_height_500hPa%2Cwind_speed_450hPa%2Cwind_direction_450hPa%2Ctemperature_450hPa%2Crelative_humidity_450hPa%2Cgeopotential_height_450hPa%2Cwind_speed_400hPa%2Cwind_direction_400hPa%2Ctemperature_400hPa%2Crelative_humidity_400hPa%2Cgeopotential_height_400hPa%2Cwind_speed_350hPa%2Cwind_direction_350hPa%2Ctemperature_350hPa%2Crelative_humidity_350hPa%2Cgeopotential_height_350hPa%2Cwind_speed_300hPa%2Cwind_direction_300hPa%2Ctemperature_300hPa%2Crelative_humidity_300hPa%2Cgeopotential_height_300hPa%2Cprecipitation%2Csnowfall%2Cfreezing_level_height%2Cwind_gusts_10m%2Ccloud_cover%2Ccape%2Cpressure_msl%2Cweather_code&models=gfs_seamless&timezone=UTC&forecast_days=7&wind_speed_unit=kmh "HTTP/1.1 200 OK"
+2026-09-01 14:29:20,062Z INFO    manaslu.fetch: Got 168 hourly steps for 28.5259,84.6094 (grid elevation 8011 m)
+2026-09-01 14:29:20,516Z INFO    manaslu.metrics: Found 5 summit window(s) of >= 6 h
+2026-09-01 14:29:20,524Z INFO    manaslu.fetch: Fetching ['ecmwf_ifs025'] forecast (attempt 1/3)
+2026-09-01 14:29:20,760Z INFO    httpx: HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=28.55&longitude=84.56&hourly=wind_speed_600hPa%2Cwind_direction_600hPa%2Ctemperature_600hPa%2Crelative_humidity_600hPa%2Cgeopotential_height_600hPa%2Cwind_speed_550hPa%2Cwind_direction_550hPa%2Ctemperature_550hPa%2Crelative_humidity_550hPa%2Cgeopotential_height_550hPa%2Cwind_speed_500hPa%2Cwind_direction_500hPa%2Ctemperature_500hPa%2Crelative_humidity_500hPa%2Cgeopotential_height_500hPa%2Cwind_speed_450hPa%2Cwind_direction_450hPa%2Ctemperature_450hPa%2Crelative_humidity_450hPa%2Cgeopotential_height_450hPa%2Cwind_speed_400hPa%2Cwind_direction_400hPa%2Ctemperature_400hPa%2Crelative_humidity_400hPa%2Cgeopotential_height_400hPa%2Cwind_speed_350hPa%2Cwind_direction_350hPa%2Ctemperature_350hPa%2Crelative_humidity_350hPa%2Cgeopotential_height_350hPa%2Cwind_speed_300hPa%2Cwind_direction_300hPa%2Ctemperature_300hPa%2Crelative_humidity_300hPa%2Cgeopotential_height_300hPa%2Cprecipitation%2Csnowfall%2Cfreezing_level_height%2Cwind_gusts_10m%2Ccloud_cover%2Ccape%2Cpressure_msl%2Cweather_code&models=ecmwf_ifs025&timezone=UTC&forecast_days=7&wind_speed_unit=kmh "HTTP/1.1 200 OK"
+2026-09-01 14:29:20,763Z INFO    manaslu.fetch: Got 168 hourly steps for 28.5000,84.5000 (grid elevation 8011 m)
+2026-09-01 14:29:21,146Z INFO    manaslu.format: SMS built: 171 chars, 2 segment(s)
+2026-09-01 14:29:21,147Z INFO    manaslu: SMS is 2 segment(s)
+2026-09-01 14:29:21,147Z INFO    manaslu: Dispatch: sent: console (printed to console) | skipped: email (disabled in config.yaml), telegram (disabled in config.yaml), sms (disabled in config.yaml)
+2026-09-01 14:29:21,493Z INFO    manaslu.store: Stored 840 forecast rows (model=gfs_seamless)
+2026-09-01 14:31:46,704Z INFO    manaslu: Starting mode=test dry_run=True
+2026-09-01 14:31:46,723Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 14:31:46,891Z INFO    manaslu.metrics: Found 1 summit window(s) of >= 6 h
+2026-09-01 14:31:46,920Z INFO    manaslu.format: SMS built: 170 chars, 2 segment(s)
+2026-09-01 14:31:47,559Z INFO    manaslu: Starting mode=digest dry_run=True
+2026-09-01 14:31:47,559Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 14:31:47,722Z INFO    manaslu.metrics: Found 1 summit window(s) of >= 6 h
+2026-09-01 14:31:47,760Z INFO    manaslu.format: SMS built: 170 chars, 2 segment(s)
+2026-09-01 14:31:47,760Z INFO    manaslu: SMS is 2 segment(s)
+2026-09-01 14:31:47,761Z INFO    manaslu: Dispatch: sent: console (printed to console) | skipped: email (disabled in config.yaml), telegram (disabled in config.yaml), sms (disabled in config.yaml)
+2026-09-01 14:31:48,019Z INFO    manaslu.store: Stored 360 forecast rows (model=gfs_seamless)
+2026-09-01 14:31:48,788Z INFO    manaslu: Starting mode=danger dry_run=True
+2026-09-01 14:31:48,788Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 14:31:48,953Z INFO    manaslu: Found 50 red event row(s) in the next 24 h
+2026-09-01 14:31:48,954Z INFO    manaslu: Decision: send=False kind=none (identical warning already sent, within reminder interval)
+2026-09-01 14:31:49,142Z INFO    manaslu.store: Stored 360 forecast rows (model=gfs_seamless)
+2026-09-01 14:31:49,838Z INFO    manaslu: Starting mode=status dry_run=True
+2026-09-01 14:43:03,215Z INFO    manaslu: Starting mode=test dry_run=False
+2026-09-01 14:43:03,215Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 14:43:03,393Z INFO    manaslu.metrics: Found 1 summit window(s) of >= 6 h
+2026-09-01 14:43:03,415Z INFO    manaslu.format: SMS built: 170 chars, 2 segment(s)
+2026-09-01 15:18:06,604Z INFO    manaslu: Starting mode=test dry_run=False
+2026-09-01 15:18:06,604Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 15:18:06,764Z INFO    manaslu.metrics: Found 1 summit window(s) of >= 6 h
+2026-09-01 15:18:06,785Z INFO    manaslu.format: SMS built: 170 chars, 2 segment(s)
+2026-09-01 15:18:07,388Z INFO    manaslu: Starting mode=digest dry_run=False
+2026-09-01 15:18:07,388Z INFO    manaslu: Loading fixture tests/fixtures/openmeteo_gfs.json (no network)
+2026-09-01 15:18:07,542Z INFO    manaslu.metrics: Found 1 summit window(s) of >= 6 h
+2026-09-01 15:18:07,576Z INFO    manaslu.format: SMS built: 170 chars, 2 segment(s)
+2026-09-01 15:18:07,577Z INFO    manaslu: SMS is 2 segment(s)
+2026-09-01 15:18:07,577Z INFO    manaslu: Dispatch: sent: console (printed to console) | skipped: email (disabled in config.yaml), telegram (disabled in config.yaml), sms (disabled in config.yaml)
+2026-09-01 15:21:06,337Z INFO    manaslu: Starting mode=danger dry_run=False
+2026-09-01 15:21:06,337Z INFO    manaslu.fetch: Fetching ['gfs_seamless'] forecast (attempt 1/3)
+2026-09-01 15:21:06,668Z INFO    httpx: HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=28.55&longitude=84.56&hourly=wind_speed_600hPa%2Cwind_direction_600hPa%2Ctemperature_600hPa%2Crelative_humidity_600hPa%2Cgeopotential_height_600hPa%2Cwind_speed_550hPa%2Cwind_direction_550hPa%2Ctemperature_550hPa%2Crelative_humidity_550hPa%2Cgeopotential_height_550hPa%2Cwind_speed_500hPa%2Cwind_direction_500hPa%2Ctemperature_500hPa%2Crelative_humidity_500hPa%2Cgeopotential_height_500hPa%2Cwind_speed_450hPa%2Cwind_direction_450hPa%2Ctemperature_450hPa%2Crelative_humidity_450hPa%2Cgeopotential_height_450hPa%2Cwind_speed_400hPa%2Cwind_direction_400hPa%2Ctemperature_400hPa%2Crelative_humidity_400hPa%2Cgeopotential_height_400hPa%2Cwind_speed_350hPa%2Cwind_direction_350hPa%2Ctemperature_350hPa%2Crelative_humidity_350hPa%2Cgeopotential_height_350hPa%2Cwind_speed_300hPa%2Cwind_direction_300hPa%2Ctemperature_300hPa%2Crelative_humidity_300hPa%2Cgeopotential_height_300hPa%2Cprecipitation%2Csnowfall%2Cfreezing_level_height%2Cwind_gusts_10m%2Ccloud_cover%2Ccape%2Cpressure_msl%2Cweather_code&models=gfs_seamless&timezone=UTC&forecast_days=7&wind_speed_unit=kmh "HTTP/1.1 200 OK"
+2026-09-01 15:21:06,676Z INFO    manaslu.fetch: Got 168 hourly steps for 28.5259,84.6094 (grid elevation 8011 m)
+2026-09-01 15:21:07,052Z INFO    manaslu: Found 50 red event row(s) in the next 24 h
+2026-09-01 15:21:07,053Z INFO    manaslu: Decision: send=True kind=new (new red condition)
+2026-09-01 15:21:07,340Z INFO    manaslu.store: Stored 840 forecast rows (model=gfs_seamless)
+2026-09-01 15:21:07,370Z INFO    manaslu.metrics: Found 5 summit window(s) of >= 6 h
+2026-09-01 15:21:07,405Z INFO    manaslu.format: SMS built: 177 chars, 2 segment(s)
+2026-09-01 15:21:07,406Z INFO    manaslu: Dispatch: sent: console (printed to console) | skipped: email (disabled in config.yaml), telegram (disabled in config.yaml), sms (disabled in config.yaml)
+2026-09-01 16:21:08,416Z INFO    manaslu: Starting mode=danger dry_run=False
+2026-09-01 16:21:08,430Z INFO    manaslu.fetch: Fetching ['gfs_seamless'] forecast (attempt 1/3)
+2026-09-01 16:21:08,764Z INFO    httpx: HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=28.55&longitude=84.56&hourly=wind_speed_600hPa%2Cwind_direction_600hPa%2Ctemperature_600hPa%2Crelative_humidity_600hPa%2Cgeopotential_height_600hPa%2Cwind_speed_550hPa%2Cwind_direction_550hPa%2Ctemperature_550hPa%2Crelative_humidity_550hPa%2Cgeopotential_height_550hPa%2Cwind_speed_500hPa%2Cwind_direction_500hPa%2Ctemperature_500hPa%2Crelative_humidity_500hPa%2Cgeopotential_height_500hPa%2Cwind_speed_450hPa%2Cwind_direction_450hPa%2Ctemperature_450hPa%2Crelative_humidity_450hPa%2Cgeopotential_height_450hPa%2Cwind_speed_400hPa%2Cwind_direction_400hPa%2Ctemperature_400hPa%2Crelative_humidity_400hPa%2Cgeopotential_height_400hPa%2Cwind_speed_350hPa%2Cwind_direction_350hPa%2Ctemperature_350hPa%2Crelative_humidity_350hPa%2Cgeopotential_height_350hPa%2Cwind_speed_300hPa%2Cwind_direction_300hPa%2Ctemperature_300hPa%2Crelative_humidity_300hPa%2Cgeopotential_height_300hPa%2Cprecipitation%2Csnowfall%2Cfreezing_level_height%2Cwind_gusts_10m%2Ccloud_cover%2Ccape%2Cpressure_msl%2Cweather_code&models=gfs_seamless&timezone=UTC&forecast_days=7&wind_speed_unit=kmh "HTTP/1.1 200 OK"
+2026-09-01 16:21:08,777Z INFO    manaslu.fetch: Got 168 hourly steps for 28.5259,84.6094 (grid elevation 8011 m)
+2026-09-01 16:21:09,133Z INFO    manaslu: Found 50 red event row(s) in the next 24 h
+2026-09-01 16:21:09,134Z INFO    manaslu: Decision: send=True kind=new (new red condition)
+2026-09-01 16:21:09,433Z INFO    manaslu.store: Stored 840 forecast rows (model=gfs_seamless)
+2026-09-01 16:21:09,472Z INFO    manaslu.metrics: Found 5 summit window(s) of >= 6 h
+2026-09-01 16:21:09,501Z INFO    manaslu.format: SMS built: 177 chars, 2 segment(s)
+2026-09-01 16:21:09,501Z INFO    manaslu: Dispatch: sent: console (printed to console) | skipped: email (disabled in config.yaml), telegram (disabled in config.yaml), sms (disabled in config.yaml)
