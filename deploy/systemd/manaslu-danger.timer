@@ -1,0 +1,14 @@
+[Unit]
+Description=Manaslu danger check, hourly
+Documentation=file://%h/Desktop/Projects/HAM-WF/HOWTORUN.md
+
+[Timer]
+OnCalendar=*-*-* *:20:00 UTC
+# If the machine was off, run once on wake rather than replaying every missed hour.
+Persistent=true
+RandomizedDelaySec=120
+AccuracySec=1min
+Unit=manaslu-danger.service
+
+[Install]
+WantedBy=timers.target

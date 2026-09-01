@@ -1,0 +1,19 @@
+[Unit]
+Description=Manaslu forecast digest
+Documentation=file://%h/Desktop/Projects/HAM-WF/HOWTORUN.md
+After=network-online.target
+Wants=network-online.target
+# Retry a few times, then wait for the next scheduled run rather than looping forever.
+StartLimitBurst=3
+StartLimitIntervalSec=1800
+
+[Service]
+Type=oneshot
+WorkingDirectory=__PROJECT_DIR__
+ExecStart=__PYTHON__ -m src.main --mode digest
+# The forecast API is occasionally slow; a run that hangs must not block the timer.
+TimeoutStartSec=600
+Restart=on-failure
+RestartSec=120
+StandardOutput=journal
+StandardError=journal

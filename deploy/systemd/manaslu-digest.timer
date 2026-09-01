@@ -1,0 +1,17 @@
+[Unit]
+Description=Manaslu forecast digest, twice daily
+Documentation=file://%h/Desktop/Projects/HAM-WF/HOWTORUN.md
+
+[Timer]
+# 01:00 and 13:00 UTC = 06:45 and 18:45 Nepal. Keep in sync with config.yaml.
+OnCalendar=*-*-* 01:00:00 UTC
+OnCalendar=*-*-* 13:00:00 UTC
+# A laptop that was asleep at 01:00 still gets its digest on wake.
+Persistent=true
+# Spread load off the exact minute.
+RandomizedDelaySec=180
+AccuracySec=1min
+Unit=manaslu-digest.service
+
+[Install]
+WantedBy=timers.target
