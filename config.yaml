@@ -68,9 +68,9 @@ recipients:
 # without it, alerts would keep being billed to a number nobody is carrying.
 channels:
   console:  { enabled: true }
-  email:    { enabled: false, subject_prefix: "[Manaslu]" }
-  telegram: { enabled: false }
-  sms:      { enabled: false, max_segments: 2, active_until: "2026-09-10" }
+  email:    { enabled: true, subject_prefix: "[Manaslu]" }
+  telegram: { enabled: true }
+  sms:      { enabled: true, max_segments: 2, active_until: "2026-09-10" }
 
 storage:
   db_path: "data/manaslu.sqlite"
