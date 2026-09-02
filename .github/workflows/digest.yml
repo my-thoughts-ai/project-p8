@@ -3,8 +3,8 @@ name: Manaslu digest
 # Twice daily. Cron is UTC. Keep these in sync with config.yaml digest.times_utc.
 on:
   schedule:
-    - cron: "0 1 * * *"    # 01:00 UTC = 06:45 Nepal
-    - cron: "0 13 * * *"   # 13:00 UTC = 18:45 Nepal
+    - cron: "15 23 * * *"    # 01:00 UTC = 05:00 Nepal
+    - cron: "15 11 * * *"   # 13:00 UTC = 17:00 Nepal
   workflow_dispatch:
     inputs:
       dry_run:
