@@ -151,8 +151,10 @@ def headline(frame: pd.DataFrame, windows: List[Dict[str, Any]], overall: str) -
     peak_wind = climbing["wind_speed_kmh"].max() if not climbing.empty else 0.0
     coldest = climbing["wind_chill_c"].min() if not climbing.empty else None
 
+    status_24h = max(day["status"], key=severity_rank) if not day.empty else GREEN
+
     parts = ["Next 24 h {} on climbing bands: peak wind {:.0f} km/h".format(
-        overall.upper(), peak_wind or 0)]
+        status_24h.upper(), peak_wind or 0)]
     if coldest is not None and pd.notna(coldest):
         parts.append("wind chill down to {:.0f} C".format(coldest))
     if windows:
