@@ -51,7 +51,7 @@ danger_mode:
 
 digest:
   # UTC times the twice-daily digest is expected to run (documentation + scheduler generation).
-  times_utc: ["01:00", "13:00"]
+  times_utc: ["23:15", "11:15"]
   table_hours: [0, 6, 12, 18, 24, 36, 48, 72]   # hours ahead to show as columns/rows
 
 # Recipients come from the environment so this file is safe to commit publicly.
