@@ -29,9 +29,9 @@ altitude_bands:
 thresholds:
   wind_speed_kmh:        { amber: 30, red: 50 }     # any climbing band
   wind_gusts_10m_kmh:    { amber: 40, red: 60 }     # surface
-  snowfall_mm_per_h:     { amber: 0.01, red: 2.0 }
-  snowfall_mm_per_24h:   { amber: 0.01, red: 10.0 }
-  precipitation_mm_per_h: { amber: 0.01, red: 0.5 }
+  snowfall_mm_per_h:     { amber: 2.0, red: 5.0 }
+  snowfall_mm_per_24h:   { amber: 20.0, red: 50.0 }
+  precipitation_mm_per_h: { amber: 1.0, red: 4.0 }
   wind_chill_c:          { amber: -40, red: -50 }   # colder than -> worse
   mslp_drop_hpa_per_6h:  { amber: 3.0, red: 6.0 }
   cape_j_per_kg:         { amber: 100, red: 500 }
@@ -40,7 +40,7 @@ summit_window:
   # A block counts as "green" when every climbing band is green and there is no precipitation.
   min_consecutive_hours: 6
   max_wind_kmh: 30
-  max_precip_mm_per_h: 0.0
+  max_precip_mm_per_h: 0.5
   min_wind_chill_c: -40
   lookahead_hours: 168
 
