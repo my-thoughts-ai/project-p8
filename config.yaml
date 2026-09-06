@@ -64,7 +64,7 @@ danger_mode:
 digest:
   # UTC times the twice-daily digest is expected to run (documentation + scheduler generation).
   times_utc: ["01:00", "13:00"]
-  table_hours: [0, 6, 12, 18, 24, 36, 48, 72]   # hours ahead to show as columns/rows
+  table_hours: [0, 12, 24, 36, 48, 60, 72, 84, 96, 108, 120, 132, 144, 156, 168]   # hours ahead to show as columns/rows
 
 # Recipients come from the environment so this file is safe to commit publicly.
 # Set MANASLU_EMAIL_TO / MANASLU_SMS_TO in .env (local) or as repository secrets
