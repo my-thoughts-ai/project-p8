@@ -153,9 +153,9 @@ class EmailChannel(Channel):
                 smtp.send_message(mail)
             LOG.info("Email sent to %s", mask(recipient))
             return True, "sent to {}".format(mask(recipient))
-        except smtplib.SMTPAuthenticationError:
-            return False, ("Gmail rejected the login. Use a 16-character App Password "
-                           "(myaccount.google.com/apppasswords), not the account password.")
+        except smtplib.SMTPAuthenticationError as exc:
+            return False, ("Gmail rejected the login [{}]. Use a 16-character App Password "
+                           "(myaccount.google.com/apppasswords), not the account password.".format(exc))
         except Exception as exc:  # network, DNS, TLS -- never fatal to the run
             LOG.error("Email send failed: %s", exc)
             return False, "email failed: {}".format(exc)
