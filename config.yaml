@@ -1,0 +1,93 @@
+# Manaslu High-Altitude Forecast Alerter — configuration
+# Secrets are NOT here. They live in .env / environment variables.
+
+location:
+  name: "Mt. Manaslu"
+  latitude: 28.55
+  longitude: 84.56
+  summit_m: 8163
+  base_camp_m: 4800
+  local_timezone: "Asia/Kathmandu"   # display only; all logic is UTC
+
+forecast:
+  models: ["gfs_seamless"]           # primary
+  cross_check_model: "ecmwf_ifs025"  # optional second opinion; null to disable
+  forecast_days: 7                   # 3-7
+  pressure_levels_hpa: [600, 550, 500, 450, 400, 350, 300]
+  timeout_seconds: 30
+  retries: 3
+  retry_backoff_seconds: 5
+
+# Target altitudes in metres. Bands are interpolated from geopotential height.
+altitude_bands:
+  - { altitude_m: 4800, label: "Base Camp",  climbing: false }
+  - { altitude_m: 5700, label: "Camp 1",     climbing: true }
+  - { altitude_m: 6400, label: "Camp 2",     climbing: true }
+  - { altitude_m: 6900, label: "Camp 3",     climbing: true }
+  - { altitude_m: 7400, label: "Camp 4",     climbing: true }
+  - { altitude_m: 8163, label: "Summit",     climbing: true }
+
+thresholds:
+  wind_speed_kmh:        { amber: 30, red: 50 }     # any climbing band
+  wind_gusts_10m_kmh:    { amber: 40, red: 60 }     # surface
+  snowfall_mm_per_h:     { amber: 2.0, red: 5.0 }
+  snowfall_mm_per_24h:   { amber: 20.0, red: 50.0 }
+  precipitation_mm_per_h: { amber: 1.0, red: 4.0 }
+  wind_chill_c:          { amber: -40, red: -50 }   # colder than -> worse
+  mslp_drop_hpa_per_6h:  { amber: 3.0, red: 6.0 }
+  cape_j_per_kg:         { amber: 100, red: 500 }
+
+summit_window:
+  # A block counts as "green" when every climbing band is green and there is no precipitation.
+  min_consecutive_hours: 6
+  max_wind_kmh: 30
+  max_precip_mm_per_h: 0.5
+  min_wind_chill_c: -40
+  lookahead_hours: 168
+# Per-altitude storm flag shown in every block ("Storm" / "No storm"). A band is
+# flagged Storm when ANY criterion trips. weather_codes are WMO codes reported by
+# Open-Meteo (65 heavy rain, 67 heavy freezing rain, 75 heavy snow, 82 violent
+# showers, 85/86 snow showers, 95 thunderstorm, 96/99 thunderstorm with hail).
+storm:
+  weather_codes: [65, 67, 75, 82, 85, 86, 95, 96, 99]
+  cape_j_per_kg: 500          # convective instability
+  mslp_drop_hpa_per_6h: 6.0   # rapid pressure fall = incoming system
+  precipitation_mm_per_h: 4.0 # heavy precip
+  snowfall_mm_per_h: 5.0      # heavy snowfall
+  wind_kmh: 60                # storm-force wind at that band
+
+danger_mode:
+  lookahead_hours: 24        # evaluate next N hours for red conditions
+  reminder_after_hours: 12   # re-send an unchanged active warning after this long
+  send_all_clear: true
+
+digest:
+  # UTC times the twice-daily digest is expected to run (documentation + scheduler generation).
+  times_utc: ["01:00", "13:00"]
+  table_hours: [0, 6, 12, 18, 24, 36, 48, 72]   # hours ahead to show as columns/rows
+
+# Recipients come from the environment so this file is safe to commit publicly.
+# Set MANASLU_EMAIL_TO / MANASLU_SMS_TO in .env (local) or as repository secrets
+# (GitHub Actions). If MANASLU_EMAIL_TO is unset the digest goes to GMAIL_ADDRESS,
+# i.e. to yourself -- the common case then needs no extra configuration.
+recipients:
+  email: "${MANASLU_EMAIL_TO}"
+  sms: "${MANASLU_SMS_TO}"
+
+# All channels default to OFF. Turn one on only after its secrets are in .env.
+# active_until: last UTC day a channel may send (inclusive, YYYY-MM-DD). Omit for no
+# limit. SMS is capped because the destination number changes after that date --
+# without it, alerts would keep being billed to a number nobody is carrying.
+channels:
+  console:  { enabled: true }
+  email:    { enabled: false, subject_prefix: "[Manaslu]" }
+  telegram: { enabled: false }
+  sms:      { enabled: false, max_segments: 2, active_until: "2026-11-20" }
+
+storage:
+  db_path: "data/manaslu.sqlite"
+  retain_days: 120           # covers the 85-day season with margin
+
+runtime:
+  log_level: "INFO"
+  log_path: "data/manaslu.log"
