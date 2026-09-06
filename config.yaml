@@ -10,8 +10,8 @@ location:
   local_timezone: "Asia/Kathmandu"   # display only; all logic is UTC
 
 forecast:
-  models: ["gfs_seamless"]           # primary
-  cross_check_model: "ecmwf_ifs025"  # optional second opinion; null to disable
+  models: ["ecmwf_ifs025"]           # primary — matches yr.no
+  cross_check_model: "gfs_seamless"  # GFS now the second opinion
   forecast_days: 7                   # 3-7
   pressure_levels_hpa: [600, 550, 500, 450, 400, 350, 300]
   timeout_seconds: 30
